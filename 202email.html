@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Confirmation</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        input {
+            display: block;
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Email Confirmation Form</h2>
+
+    <form>
+
+        <label for="email">Enter Email:</label>
+        <input type="email" id="email">
+        <div id="emailError" class="error"></div>
+
+        <br>
+
+        <label for="confirmEmail">Confirm Email:</label>
+        <input type="email" id="confirmEmail">
+        <div id="confirmEmailError" class="error"></div>
+
+        <div id="matchError" class="error"></div>
+
+        <br>
+
+        <button id="confirmBtn">Confirm</button>
+
+    </form>
+
+    <script>
+    $(document).ready(function () {
+
+        $("#confirmBtn").click(function (e) {
+            e.preventDefault();
+
+            const email1 = $("#email").val();
+            const email2 = $("#confirmEmail").val();
+
+            $(".error").text("");
+
+            let hasError = false;
+
+            if (email1 === "") {
+                $("#emailError").text("This field is required.");
+                hasError = true;
+            }
+
+            if (email2 === "") {
+                $("#confirmEmailError").text("This field is required.");
+                hasError = true;
+            }
+
+            if (!hasError) {
+                if (email1 !== email2) {
+                    $("#matchError").text("The email addresses must match.");
+                } else {
+                    alert("Email confirmation successful");
+                }
+            }
+        });
+
+    });
+    </script>
+
+</body>
+</html>
